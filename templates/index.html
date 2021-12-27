@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Learn your vocabulary</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/index_style.css'>
+</head>
+<body>
+    <div id='title'>
+        <h1> Bienvenue LEarnEnglish </h1>
+        <p> Ce site est en bêta</p>
+    </div>
+    <div id='settings'>
+        <p>Choisis les paramètres ta session d'apprentissage</p>
+        <div>
+            <label for="number">Nombre de mot voulu</label>
+            <input id="number" type="number" max="50" required>
+        </div>
+        <div>
+            <label for="theme">Thème associé aux mots</label>
+            <select id="theme" required>
+                <option id="all" value="all">Miscellenious</option>
+                <script>
+                    $.ajax({
+                        url: 'http://127.0.0.1:8080/get_theme',
+                        type: 'GET',
+                        DataType: 'json',
+                        headers: {'Access-Control-Allow-Origin': '*'},
+                        success: function (data) {
+                            selection = document.getElementById("theme");
+                            for (let [i, value] of Object.entries(data)){
+                                selection.innerHTML += "<option id=" + value + " value= "+ value +">"  + value + "</option> \n";
+                            }
+                        }
+                    })
+                </script>
+            </select>
+        </div>
+        <div>
+            <button type="submit" onclick="submit()">Lancer la scéance</button>
+            <script>
+                document.onkeypress = function (event) {
+                    if (event.which == 13) {
+                        submit()
+                    }
+                }
+
+                function submit() {
+                    n = document.getElementById('number').value
+                    theme = document.getElementById('theme').value
+                    $.ajax({
+                        url: 'http://127.0.0.1:8080/submit',
+                        type: 'POST',
+                        DataType: 'json',
+                        data:{
+                            n: n,
+                            theme: theme
+                        }
+                    })
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
