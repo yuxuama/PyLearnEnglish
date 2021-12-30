@@ -16,7 +16,6 @@ class Api:
         self.app.add_url_rule('/get<int:size>&<string:theme>', 'get', self.get_word, methods=['GET'])
         self.app.add_url_rule('/get/', 'get', self.get_word, methods=['GET'])
         self.app.add_url_rule('/get_theme', 'gettheme', self.get_theme, methods=['GET'])
-        self.app.add_url_rule('/submit', 'submit', self.submit, methods=['POST', 'GET'])
 
     def launch(self, host="127.0.0.1", port=8080):
         self.set_route()
@@ -34,10 +33,6 @@ class Api:
         for i in range(len(data)):
             resp[i] = data[i]['_id']
         return make_response(resp)
-
-    def submit(self):
-        print(request.json)
-        return 'ok'
 
     def index(self):
         return render_template('index.html')
