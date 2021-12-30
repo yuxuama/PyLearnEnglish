@@ -13,19 +13,17 @@ class Api:
     
     def set_route(self):
         self.app.add_url_rule('/', 'index', self.index)
-        self.app.add_url_rule('/get<int:size>', 'get', self.get_word, methods=['GET'])
+        self.app.add_url_rule('/get<int:size>&<string:theme>', 'get', self.get_word, methods=['GET'])
         self.app.add_url_rule('/get/', 'get', self.get_word, methods=['GET'])
         self.app.add_url_rule('/get_theme', 'gettheme', self.get_theme, methods=['GET'])
-        self.app.add_url_rule('/lesson?<int:n>&<string:theme>', 'lesson', self.lesson)
-        self.app.add_url_rule('/lesson', 'lesson', self.lesson)
         self.app.add_url_rule('/submit', 'submit', self.submit, methods=['POST', 'GET'])
 
     def launch(self, host="127.0.0.1", port=8080):
         self.set_route()
         self.app.run(host=host, port=port)
     
-    def get_word(self, size=1):
-        cur = list(self.db.get(size))
+    def get_word(self, size=10, theme='all'):
+        cur = list(self.db.get(size, theme))
         for element in cur:
             element.pop('_id', None)
         return jsonify(cur)
@@ -36,9 +34,6 @@ class Api:
         for i in range(len(data)):
             resp[i] = data[i]['_id']
         return make_response(resp)
-
-    def lesson(self, n=10, theme='all'):
-        return render_template('lesson.html', n=n, theme=theme)
 
     def submit(self):
         print(request.json)

@@ -6,62 +6,51 @@
     <title>Learn your vocabulary</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel='stylesheet' type='text/css' media='screen' href='/static/index_style.css'>
+    <link rel='stylesheet' type='text/css' href='/static/index_style.css'>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
 </head>
 <body>
-    <div id='title'>
-        <h1> Bienvenue LEarnEnglish </h1>
-        <p> Ce site est en bêta</p>
-    </div>
-    <div id='settings'>
-        <p>Choisis les paramètres ta session d'apprentissage</p>
-        <div>
-            <label for="number">Nombre de mot voulu</label>
-            <input id="number" type="number" max="50" required>
+    <div id="top">
+        <div id='title'>
+            <h1> Bienvenue LearnEnglish </h1>
+            <p class="title"> Ce site est en bêta</p>
         </div>
-        <div>
-            <label for="theme">Thème associé aux mots</label>
-            <select id="theme" required>
-                <option id="all" value="all">Miscellenious</option>
-                <script>
-                    $.ajax({
-                        url: 'http://127.0.0.1:8080/get_theme',
-                        type: 'GET',
-                        DataType: 'json',
-                        headers: {'Access-Control-Allow-Origin': '*'},
-                        success: function (data) {
-                            selection = document.getElementById("theme");
-                            for (let [i, value] of Object.entries(data)){
-                                selection.innerHTML += "<option id=" + value + " value= "+ value +">"  + value + "</option> \n";
+        <div id='settings'>
+            <div class="block">
+                <label for="number">Nombre de mot voulu</label>
+                <input id="number" type="number" max="50" required>
+            </div>
+            <div class="block">
+                <label for="theme">Thème associé aux mots</label>
+                <select id="theme" required>
+                    <option id="all" value="all">Miscellenious</option>
+                    <script>
+                        $.ajax({
+                            url: 'http://127.0.0.1:8080/get_theme',
+                            type: 'GET',
+                            DataType: 'json',
+                            headers: {'Access-Control-Allow-Origin': '*'},
+                            success: function (data) {
+                                selection = document.getElementById("theme");
+                                for (let [i, value] of Object.entries(data)){
+                                    selection.innerHTML += "<option id=" + value + " value= "+ value +">"  + value + "</option> \n";
+                                }
                             }
-                        }
-                    })
-                </script>
-            </select>
+                        })
+                    </script>
+                </select>
+            </div>
+            <div class="block">
+                <button type="submit" onclick="submit()">Lancer la scéance</button>
+            </div>
         </div>
-        <div>
-            <button type="submit" onclick="submit()">Lancer la scéance</button>
-            <script>
-                document.onkeypress = function (event) {
-                    if (event.which == 13) {
-                        submit()
-                    }
-                }
+    </div>
 
-                function submit() {
-                    n = document.getElementById('number').value
-                    theme = document.getElementById('theme').value
-                    $.ajax({
-                        url: 'http://127.0.0.1:8080/submit',
-                        type: 'POST',
-                        DataType: 'json',
-                        data:{
-                            n: n,
-                            theme: theme
-                        }
-                    })
-                }
-            </script>
+    <div class="container">
+        <div id = "lesson">
+            <p id="status"></p>
+            <h4 id = "word">Welcome</h4>
+            <input type="text" placeholder="Ta réponse sera ici" id="answer">
         </div>
     </div>
 </body>

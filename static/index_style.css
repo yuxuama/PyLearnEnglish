@@ -2,9 +2,60 @@ h1 {
     text-align: center;
 }
 
-div.title {
+p.title {
+    text-align: center;
+}
+
+div#title {
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+}
+
+div#top {
+    width: 100%;
+    position: relative;
+    background-color: darkgray;
+    position: relative;
+}
+
+div#settings {
+    margin: 0 auto;
+}
+
+div.block {
+    width: 33.33%;
+    float: left;
+    background-color: darkgray;
+    display: flex;
+    align-items: center;
+}
+
+div.container {
+    position: relative;
+    margin: 15% auto;
+    width: 20%;
+    height: 20%;
+    border-radius: 10%;
+    box-shadow:  5px 5px 5px 5px darkgray;
+    padding: 10px;
+}
+
+div#lesson {
+    width: 100%;
+}
+
+input#answer {
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    width: 100%;
+    border-bottom-color: darkgray;
+    
+}
+
+body {
+    margin: 0 0;
 }

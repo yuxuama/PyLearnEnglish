@@ -18,12 +18,20 @@ class Database:
     def delete(self, word=str):
         self.collection.delete_one({"word": word})
     
-    def get(self, limit, theme=None):
-        if theme is None:
-            return self.collection.find({}).limit(limit)
+    def get(self, limit=int, theme=None):
+        pipeline = []
+        if theme is None or theme == "all":
+            pipeline = [
+                {"$sample": {"size": limit}}
+            ]
         else:
-            return self.collection.find({"theme": theme}).limit(limit)
-    
+            pipeline = [
+                {"$match": {"theme": theme}},
+                {"$sample": {"size": limit}}
+            ]
+        cur = self.collection.aggregate(pipeline=pipeline)
+        return cur
+
     def get_themes(self):
         pipeline = [
             {'$group': {"_id": "$theme"}}
