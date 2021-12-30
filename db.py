@@ -1,5 +1,4 @@
 import pymongo
-from pymongo.message import delete
 
 class Database:
 

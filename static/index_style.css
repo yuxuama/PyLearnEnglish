@@ -37,7 +37,7 @@ div.container {
     position: relative;
     margin: 15% auto;
     width: 20%;
-    height: 20%;
+    height: 200px;
     border-radius: 10%;
     box-shadow:  5px 5px 5px 5px darkgray;
     padding: 10px;
@@ -45,6 +45,7 @@ div.container {
 
 div#lesson {
     width: 100%;
+    height: 100%;
 }
 
 input#answer {
@@ -53,7 +54,7 @@ input#answer {
     border-right: hidden;
     width: 100%;
     border-bottom-color: darkgray;
-    
+    margin: auto auto;
 }
 
 body {

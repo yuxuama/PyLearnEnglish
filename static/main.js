@@ -9,8 +9,14 @@ function submit() {
     const number = document.getElementById("number").value;
     const theme = document.getElementById("theme").value;
     const explain = document.getElementById('status');
+
+    if(n == '') {
+        alert("Le paramètre du nombre d'élément n'est pas valide")
+        return
+    }
+
     if (!lessonContext) {
-        explain.innerHTML = "Appuie sur 'Entrée' pour valider"
+        explain.innerHTML = "Tu as choisit le thème: " + theme
         lessonContext = true
         lesson(number , theme);
     }
@@ -31,7 +37,6 @@ async function lesson(number , theme) {
 }
 
 function update(event, initial=false) {
-    console.log(event)
     if (event.target.id === 'answer' && event.inputType === "insertLineBreak" && lessonContext && !initial){
         const target = document.getElementById('word');
         if (n >= datas.length) {

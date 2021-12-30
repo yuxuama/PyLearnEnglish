@@ -1,9 +1,6 @@
-from flask import json
-from flask.helpers import url_for
 from flask.json import jsonify
-from flask.wrappers import Request
 from db import Database
-from flask import Flask, render_template, make_response, redirect, request
+from flask import Flask, render_template, make_response
 
 class Api:
 
