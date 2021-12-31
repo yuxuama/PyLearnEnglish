@@ -3,7 +3,7 @@ import pymongo
 class Database:
 
     def __init__(self) -> None:
-        client = pymongo.MongoClient("mongodb+srv://yuxuama:0WSz5rPi689BZ0IV@cluster0.n2tqt.mongodb.net/Database?retryWrites=true&w=majority")
+        client = pymongo.MongoClient("<MongoURI>")
         self.database = client.vocabulary
         self.collection = self.database.vocab
 
