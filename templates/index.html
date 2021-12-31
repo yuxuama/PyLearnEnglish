@@ -33,7 +33,7 @@
                             success: function (data) {
                                 selection = document.getElementById("theme");
                                 for (let [i, value] of Object.entries(data)){
-                                    selection.innerHTML += "<option id=" + value + " value= "+ value +">"  + value + "</option> \n";
+                                    selection.innerHTML += '<option value= \"'+ value +'\">'  + value + '</option> \n';
                                 }
                             }
                         })
@@ -49,6 +49,7 @@
     <div class="container">
         <div id = "lesson">
             <p id="status"></p>
+            <p id="counter"></p>
             <h3 id = "word">Welcome</h3>
             <input type="text" placeholder="Ta réponse sera ici" id="answer">
         </div>
